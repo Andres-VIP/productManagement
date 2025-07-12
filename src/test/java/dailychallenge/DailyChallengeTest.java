@@ -1,0 +1,181 @@
+package dailychallenge;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DailyChallengeTest {
+
+    // 1. Are Anagrams
+    public boolean areAnagrams(String str1, String str2) {
+        String s1 = str1.replaceAll("\\s+", "").toLowerCase();
+        String s2 = str2.replaceAll("\\s+", "").toLowerCase();
+        if (s1.length() != s2.length()) return false;
+        char[] arr1 = s1.toCharArray();
+        char[] arr2 = s2.toCharArray();
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        return Arrays.equals(arr1, arr2);
+    }
+
+    @Test
+    public void testAreAnagrams() {
+        String input1 = "listen";
+        String input2 = "silent";
+        boolean result = areAnagrams(input1, input2);
+        System.out.println("Input: " + input1 + ", " + input2);
+        System.out.println("Output: " + result);
+    }
+
+    // 2. Count character occurrences
+    @Test
+    public void testCountCharacterOccurrence() {
+        String input = "Hola Mundo";
+        Map<String, Long> output = Arrays.stream(input.split(""))
+                .filter(i -> !" ".equals(i))
+                .map(String::toLowerCase)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println("Output: " + output);
+    }
+
+    // 3. Find duplicate words
+    @Test
+    public void testFindRepeatedWords() {
+        String[] inputArray = {"java", "code", "stream", "java", "loop", "stream"};
+        Set<String> repeatedWords = Arrays.stream(inputArray)
+                .collect(Collectors.groupingBy(word -> word, Collectors.counting()))
+                .entrySet().stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+        System.out.println("Output: " + repeatedWords);
+        Set<String> expected = Set.of("java", "stream");
+        assertEquals(expected, repeatedWords);
+    }
+
+    // 4. First non-repeating character
+    private Character findFirstNonRepeatingChar(String input) {
+        if (input == null || input.isEmpty()) return null;
+        Map<Character, Integer> charCount = new LinkedHashMap<>();
+        input.chars()
+                .mapToObj(c -> (char) c)
+                .forEach(c -> charCount.put(c, charCount.getOrDefault(c, 0) + 1));
+        Optional<Character> result = charCount.entrySet().stream()
+                .filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .findFirst();
+        return result.orElse(null);
+    }
+
+    @Test
+    public void testFindFirstNonRepeatingChar() {
+        String input = "aabbcddee";
+        Character result = findFirstNonRepeatingChar(input);
+        System.out.println("Input: " + input);
+        System.out.println("First non-repeating character: " + result);
+        assertEquals('c', result);
+    }
+
+    // 5. Group by first letter
+    public Map<Character, List<String>> groupByFirstLetter(List<String> words) {
+        Map<Character, List<String>> grouped = new HashMap<>();
+        for (String word : words) {
+            if (word == null || word.isEmpty()) continue;
+            char firstChar = word.charAt(0);
+            grouped.computeIfAbsent(firstChar, k -> new ArrayList<>()).add(word);
+        }
+        return grouped;
+    }
+
+    @Test
+    public void testGroupByFirstLetter() {
+        List<String> input = Arrays.asList("java", "junit", "code", "cat", "stream");
+        Map<Character, List<String>> result = groupByFirstLetter(input);
+        System.out.println("Output: " + result);
+    }
+
+    // 6. Recursive digit sum
+    public static int digitalRootStream(int n) {
+        if (n < 10) return n;
+        int sum = String.valueOf(n)
+                .chars()
+                .map(c -> c - '0')
+                .sum();
+        return digitalRootStream(sum);
+    }
+
+    @Test
+    public void testDigitalRootStream() {
+        int result = digitalRootStream(9875);
+        System.out.println("Resultado: " + result);
+        assertEquals(2, result);
+    }
+
+    // 7. Remove duplicates from list
+    private List<Integer> removeDuplicates(List<Integer> input) {
+        if (input == null) return null;
+        return input.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @Test
+    public void testRemoveDuplicates() {
+        List<Integer> input = Arrays.asList(1, 2, 3, 2, 1, 4);
+        List<Integer> result = removeDuplicates(input);
+        System.out.println("Input: " + input);
+        System.out.println("Output: " + result);
+    }
+
+    // 8. Reverse words in sentence
+    public String reverseWordsWithStream(String sentence) {
+        return Arrays.stream(sentence.split(" "))
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);
+                            return String.join(" ", list);
+                        }));
+    }
+
+    @Test
+    public void testReverseWordsWithStream() {
+        String input = "Hola mundo Java";
+        String result = reverseWordsWithStream(input);
+        System.out.println("Input: " + input);
+        System.out.println("Output: " + result);
+        assertEquals("Java mundo Hola", result);
+    }
+
+    // 9. Sum of even numbers
+    @Test
+    public void printSumOfEvenNumbers() {
+        Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                .filter(i -> i % 2 == 0)
+                .reduce(Integer::sum)
+                .ifPresent(result -> System.out.println("Sum of even numbers: " + result));
+    }
+
+    // 10. Count words in sentence
+    public static long countWords(String sentence) {
+        if (sentence == null || sentence.trim().isEmpty()) {
+            return 0;
+        }
+        return Stream.of(sentence.trim().split("\\s+")).count();
+    }
+
+    @Test
+    public void testCountWords() {
+        String sentence = "Java is fun and powerful";
+        long result = countWords(sentence);
+        System.out.println("Input: \"" + sentence + "\"");
+        System.out.println("Output: " + result);
+        assertEquals(5, result);
+    }
+}
