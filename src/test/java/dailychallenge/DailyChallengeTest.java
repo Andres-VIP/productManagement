@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -177,5 +179,31 @@ public class DailyChallengeTest {
         System.out.println("Input: \"" + sentence + "\"");
         System.out.println("Output: " + result);
         assertEquals(5, result);
+    }
+
+    // 14. Sum all digits in list
+    public int sumAllDigits(List<Integer> numbers) {
+        int total = 0;
+
+        for (int number : numbers) {
+            int n = Math.abs(number); // Por si hay negativos
+            while (n > 0) {
+                total += n % 10;
+                n /= 10;
+            }
+        }
+
+        return total;
+    }
+
+    @Test
+    public void testSumAllDigits() {
+        List<Integer> input = Arrays.asList(12, 34);
+
+        int result = sumAllDigits(input);
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (sum of digits): " + result);
+        // Output esperado: 10
     }
 }
