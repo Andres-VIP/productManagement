@@ -181,12 +181,12 @@ public class DailyChallengeTest {
         assertEquals(5, result);
     }
 
-    // 14. Sum all digits in list
+    // 11. Sum all digits in list
     public int sumAllDigits(List<Integer> numbers) {
         int total = 0;
 
         for (int number : numbers) {
-            int n = Math.abs(number); // Por si hay negativos
+            int n = Math.abs(number);
             while (n > 0) {
                 total += n % 10;
                 n /= 10;
@@ -204,6 +204,19 @@ public class DailyChallengeTest {
 
         System.out.println("Input: " + input);
         System.out.println("Output (sum of digits): " + result);
-        // Output esperado: 10
     }
+
+    // 12. Find Longest Word With Stream
+    @Test
+    public void testFindLongestWord() {
+        List<String> input = Arrays.asList("hello", "world", "programming");
+
+        String result = input.stream()
+                .max(Comparator.comparingInt(String::length))
+                .orElse(null); // In case the list is empty
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (longest word): " + result);
+    }
+
 }
