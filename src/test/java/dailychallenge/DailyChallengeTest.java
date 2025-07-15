@@ -219,4 +219,16 @@ public class DailyChallengeTest {
         System.out.println("Output (longest word): " + result);
     }
 
+    //13. Count Word Frequency Test
+    @Test
+    public void testCountWordFrequencyWithStream() {
+        String input = "Java is great and Java is fast";
+
+        Map<String, Long> output = Arrays.stream(input.toLowerCase().split(" "))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        System.out.println("Input: " + input);
+        System.out.println("Output: " + output);
+    }
+
 }
