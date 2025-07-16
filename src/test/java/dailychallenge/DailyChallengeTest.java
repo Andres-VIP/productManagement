@@ -2,9 +2,11 @@ package dailychallenge;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.DayOfWeek;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.Optional;
 import java.util.Arrays;
@@ -231,4 +233,22 @@ public class DailyChallengeTest {
         System.out.println("Output: " + output);
     }
 
+    // 14. Check if list is sorted in ascending order using Stream
+    @Test
+    public void testIsSortedAscendingStream() {
+        List<Integer> input1 = Arrays.asList(1, 2, 3, 4);
+        List<Integer> input2 = Arrays.asList(1, 3, 2);
+
+        boolean result1 = IntStream.range(0, input1.size() - 1)
+                .allMatch(i -> input1.get(i) <= input1.get(i + 1));
+
+        boolean result2 = IntStream.range(0, input2.size() - 1)
+                .allMatch(i -> input2.get(i) <= input2.get(i + 1));
+
+        System.out.println("Input: " + input1);
+        System.out.println("Output (is sorted ascending): " + result1);
+
+        System.out.println("Input: " + input2);
+        System.out.println("Output (is sorted ascending): " + result2);
+    }
 }
