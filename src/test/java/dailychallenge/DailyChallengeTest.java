@@ -251,4 +251,30 @@ public class DailyChallengeTest {
         System.out.println("Input: " + input2);
         System.out.println("Output (is sorted ascending): " + result2);
     }
+
+    // 15. Generate Pascal's Triangle
+    @Test
+    public void testGeneratePascalTriangle() {
+        int input = 5;
+
+        List<List<Integer>> triangle = new ArrayList<>();
+
+        for (int row = 0; row < input; row++) {
+            List<Integer> currentRow = new ArrayList<>();
+
+            for (int col = 0; col <= row; col++) {
+                if (col == 0 || col == row) {
+                    currentRow.add(1);
+                } else {
+                    int value = triangle.get(row - 1).get(col - 1) + triangle.get(row - 1).get(col);
+                    currentRow.add(value);
+                }
+            }
+
+            triangle.add(currentRow);
+        }
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (Pascal's Triangle): " + triangle);
+    }
 }
