@@ -2,7 +2,6 @@ package dailychallenge;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.DayOfWeek;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -276,5 +275,27 @@ public class DailyChallengeTest {
 
         System.out.println("Input: " + input);
         System.out.println("Output (Pascal's Triangle): " + triangle);
+    }
+
+    // 16. Reverse a String
+    @Test
+    public void testReverseStringWithStream() {
+        String input = "hello";
+
+        String output = input.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);
+                            return list.stream()
+                                    .map(String::valueOf)
+                                    .collect(Collectors.joining());
+                        }));
+
+        System.out.println("Input: " + input);
+        System.out.println("Output: " + output);
+
+        assertEquals("olleh", output);
     }
 }
