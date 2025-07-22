@@ -298,4 +298,17 @@ public class DailyChallengeTest {
 
         assertEquals("olleh", output);
     }
+
+    // 17. Sum the first N natural numbers using Stream
+    @Test
+    public void testSumFirstNNumbersWithStream() {
+        int input = 5;
+
+        int output = IntStream.rangeClosed(1, input).sum();
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (sum from 1 to " + input + "): " + output);
+
+        assertEquals(15, output);
+    }
 }
