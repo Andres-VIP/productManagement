@@ -311,4 +311,18 @@ public class DailyChallengeTest {
 
         assertEquals(15, output);
     }
+
+    // 18. Calculate factorial using Stream
+    @Test
+    public void testCalculateFactorialWithStream() {
+        int input = 5;
+
+        int output = IntStream.rangeClosed(1, input)
+                .reduce(1, (a, b) -> a * b);
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (factorial): " + output);
+
+        assertEquals(120, output);
+    }
 }
