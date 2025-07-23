@@ -325,4 +325,21 @@ public class DailyChallengeTest {
 
         assertEquals(120, output);
     }
+
+    // 18. Find the most frequent number in a list
+    @Test
+    public void testFindMostFrequentNumberCompact() {
+        List<Integer> input = Arrays.asList(1, 2, 2, 3, 3, 3, 4);
+
+        int output = input.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .get().getKey();
+
+        System.out.println("Input: " + input);
+        System.out.println("Output (most frequent number): " + output);
+
+        assertEquals(3, output);
+    }
 }
