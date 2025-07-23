@@ -326,7 +326,7 @@ public class DailyChallengeTest {
         assertEquals(120, output);
     }
 
-    // 18. Find the most frequent number in a list
+    // 19. Find the most frequent number in a list
     @Test
     public void testFindMostFrequentNumberCompact() {
         List<Integer> input = Arrays.asList(1, 2, 2, 3, 3, 3, 4);
@@ -341,5 +341,24 @@ public class DailyChallengeTest {
         System.out.println("Output (most frequent number): " + output);
 
         assertEquals(3, output);
+    }
+
+    // 20. Find the sum of the main diagonal of a square matrix
+    @Test
+    public void testDiagonalSumWithStream() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        int output = IntStream.range(0, matrix.length)
+                .map(i -> matrix[i][i])
+                .sum();
+
+        System.out.println("Input: " + Arrays.deepToString(matrix));
+        System.out.println("Output (diagonal sum): " + output);
+
+        assertEquals(15, output);
     }
 }
