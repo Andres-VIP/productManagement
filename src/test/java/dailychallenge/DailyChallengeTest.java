@@ -361,4 +361,12 @@ public class DailyChallengeTest {
 
         assertEquals(15, output);
     }
+
+    @Test // 21. Calculate the intersection of two lists
+    public void testFindIntersectionBetweenLists() {
+        List<Integer> listA = Arrays.asList(1, 2, 3, 4), listB = Arrays.asList(3, 4, 5);
+        List<Integer> result = listA.stream().filter(listB::contains).distinct().toList();
+        System.out.println("Input listA: " + listA + " | Input listB: " + listB + " | Output (intersection): " + result);
+        assertEquals(List.of(3, 4), result);
+    }
 }
