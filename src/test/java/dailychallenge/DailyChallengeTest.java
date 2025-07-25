@@ -385,4 +385,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output: %s%n", input, output);
         assertEquals(List.of("Java", "Stream"), output);
     }
+
+    @Test // 24. Calculate average of a list of integers
+    public void testCalculateAverage() {
+        List<Integer> input = List.of(2, 4, 6, 8);
+        double output = input.stream().mapToInt(i -> i).average().orElse(0);
+        System.out.printf("Input: %s | Output: %.1f%n", input, output);
+        assertEquals(5.0, output);
+    }
 }
