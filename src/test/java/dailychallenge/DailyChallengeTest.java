@@ -371,11 +371,18 @@ public class DailyChallengeTest {
         assertEquals(List.of(3, 4), result);
     }
 
-    @Test // 23. Check if a number is prime
+    @Test // 22. Check if a number is prime
     public void testIsPrime() {
         int input = 7;
         boolean result = input > 1 && IntStream.rangeClosed(2, (int) Math.sqrt(input)).noneMatch(n -> input % n == 0);
         System.out.printf("Input: %d | Output (is prime): %b%n", input, result);
         assertTrue(result);
+    }
+    @Test // 23. Remove null or empty values from a list
+    public void testRemoveNullOrEmptyStrings() {
+        List<String> input = Arrays.asList("Java", "", null, "Stream", "");
+        List<String> output = input.stream().filter(s -> s != null && !s.isEmpty()).toList();
+        System.out.printf("Input: %s | Output: %s%n", input, output);
+        assertEquals(List.of("Java", "Stream"), output);
     }
 }
