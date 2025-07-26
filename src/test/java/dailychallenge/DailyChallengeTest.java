@@ -393,4 +393,13 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output: %.1f%n", input, output);
         assertEquals(5.0, output);
     }
+
+    @Test // 25. Get first n even numbers
+    public void testGetFirstNEvenNumbers() {
+        int input = 4;
+        List<Integer> result = IntStream.iterate(0, n -> n + 2).limit(input).boxed().toList();
+        System.out.printf("Input: %d | Output (first %d even numbers): %s%n", input, input, result);
+        assertEquals(List.of(0, 2, 4, 6), result);
+    }
+
 }
