@@ -402,4 +402,11 @@ public class DailyChallengeTest {
         assertEquals(List.of(0, 2, 4, 6), result);
     }
 
+    @Test // 26. Find the second largest number
+    public void testFindSecondLargest() {
+        List<Integer> input = List.of(10, 5, 20, 8);
+        int result = input.stream().distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElseThrow();
+        System.out.printf("Input: %s | Output (second largest): %d%n", input, result);
+        assertEquals(10, result);
+    }
 }
