@@ -419,4 +419,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output: %s%n", input, result);
         assertEquals(List.of("a", "b", "c", "a"), result);
     }
+
+    @Test // 28. Convert a list of words into an acronym
+    public void testConvertToAcronym() {
+        var input = List.of("Java", "Virtual", "Machine");
+        var result = input.stream().map(w -> "" + w.charAt(0)).collect(Collectors.joining());
+        System.out.printf("Input: %s | Output (acronym): %s%n", input, result);
+        assertEquals("JVM", result);
+    }
 }
