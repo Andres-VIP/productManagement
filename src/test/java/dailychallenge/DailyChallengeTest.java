@@ -409,4 +409,14 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (second largest): %d%n", input, result);
         assertEquals(10, result);
     }
+
+    @Test // 27. Remove consecutive duplicates from a list
+    public void testRemoveConsecutiveDuplicates() {
+        List<String> input = List.of("a", "a", "b", "b", "c", "a", "a");
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < input.size(); i++)
+            if (i == 0 || !input.get(i).equals(input.get(i - 1))) result.add(input.get(i));
+        System.out.printf("Input: %s | Output: %s%n", input, result);
+        assertEquals(List.of("a", "b", "c", "a"), result);
+    }
 }
