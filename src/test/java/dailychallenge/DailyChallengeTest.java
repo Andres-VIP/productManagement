@@ -427,4 +427,13 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (acronym): %s%n", input, result);
         assertEquals("JVM", result);
     }
+
+    @Test // 29. Find missing number in sequence
+    public void testFindMissingNumber() {
+        var input = List.of(1, 2, 4, 5);
+        int missing = ((input.size() + 1) * (input.size() + 2) / 2) - input.stream().mapToInt(i -> i).sum();
+        System.out.printf("Input: %s | Output (missing number): %d%n", input, missing);
+        assertEquals(3, missing);
+    }
+
 }
