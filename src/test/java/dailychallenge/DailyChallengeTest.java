@@ -436,4 +436,11 @@ public class DailyChallengeTest {
         assertEquals(3, missing);
     }
 
+    @Test // 30. Check if list contains duplicates
+    public void testContainsDuplicates() {
+        List<String> input = List.of("a", "b", "c", "a");
+        boolean hasDuplicates = input.size() != new HashSet<>(input).size();
+        System.out.printf("Input: %s | Output (has duplicates): %b%n", input, hasDuplicates);
+        assertTrue(hasDuplicates);
+    }
 }
