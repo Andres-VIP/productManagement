@@ -451,4 +451,13 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (sum of values): %d%n", input, result);
         assertEquals(6, result);
     }
+
+    @Test // 32. Reverse word order in a sentence
+    public void testReverseWordOrder() {
+        String input = "Java is powerful";
+        String result = Stream.of(input.split(" "))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), l -> { Collections.reverse(l); return String.join(" ", l); }));
+        System.out.printf("Input: \"%s\" | Output: \"%s\"%n", input, result);
+        assertEquals("powerful is Java", result);
+    }
 }
