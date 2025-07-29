@@ -443,4 +443,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (has duplicates): %b%n", input, hasDuplicates);
         assertTrue(hasDuplicates);
     }
+
+    @Test // 31. Sum all values in a map
+    public void testSumMapValues() {
+        Map<String, Integer> input = Map.of("a", 1, "b", 2, "c", 3);
+        int result = input.values().stream().mapToInt(i -> i).sum();
+        System.out.printf("Input: %s | Output (sum of values): %d%n", input, result);
+        assertEquals(6, result);
+    }
 }
