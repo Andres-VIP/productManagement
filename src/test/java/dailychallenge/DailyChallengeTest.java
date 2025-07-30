@@ -469,4 +469,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: \"%s\", Target: '%c' | Output (count): %d%n", input, target, count);
         assertEquals(3, count);
     }
+
+    @Test // 34. Check if a word is a palindrome
+    public void testIsPalindrome() {
+        String input = "radar";
+        boolean result = input.equals(new StringBuilder(input).reverse().toString());
+        System.out.printf("Input: \"%s\" | Output (is palindrome): %b%n", input, result);
+        assertTrue(result);
+    }
 }
