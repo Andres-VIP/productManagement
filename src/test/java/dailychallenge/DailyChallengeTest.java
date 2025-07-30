@@ -460,4 +460,13 @@ public class DailyChallengeTest {
         System.out.printf("Input: \"%s\" | Output: \"%s\"%n", input, result);
         assertEquals("powerful is Java", result);
     }
+
+    @Test // 33. Count occurrences of a specific character
+    public void testCountCharOccurrences() {
+        String input = "banana";
+        char target = 'a';
+        long count = input.chars().filter(c -> c == target).count();
+        System.out.printf("Input: \"%s\", Target: '%c' | Output (count): %d%n", input, target, count);
+        assertEquals(3, count);
+    }
 }
