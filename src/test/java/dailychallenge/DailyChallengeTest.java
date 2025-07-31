@@ -477,4 +477,17 @@ public class DailyChallengeTest {
         System.out.printf("Input: \"%s\" | Output (is palindrome): %b%n", input, result);
         assertTrue(result);
     }
+
+    @Test // 35. Merge two lists and remove duplicates
+    public void testMergeListsAndRemoveDuplicates() {
+        List<Integer> list1 = List.of(1, 2, 3);
+        List<Integer> list2 = List.of(3, 4, 5);
+
+        List<Integer> result = Stream.concat(list1.stream(), list2.stream())
+                .distinct()
+                .collect(Collectors.toList());
+
+        System.out.printf("Input: %s + %s | Output (merged unique): %s%n", list1, list2, result);
+        assertEquals(List.of(1, 2, 3, 4, 5), result);
+    }
 }
