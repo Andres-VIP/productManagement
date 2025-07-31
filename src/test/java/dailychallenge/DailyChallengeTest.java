@@ -490,4 +490,15 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s + %s | Output (merged unique): %s%n", list1, list2, result);
         assertEquals(List.of(1, 2, 3, 4, 5), result);
     }
+
+    @Test // 36. Count elements greater than a threshold
+    public void testCountGreaterThanThreshold() {
+        List<Integer> input = List.of(3, 7, 2, 10, 5);
+        int threshold = 5;
+
+        long count = input.stream().filter(i -> i > threshold).count();
+
+        System.out.printf("Input: %s, Threshold: %d | Output (count): %d%n", input, threshold, count);
+        assertEquals(2, count);
+    }
 }
