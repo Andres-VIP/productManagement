@@ -513,4 +513,12 @@ public class DailyChallengeTest {
     private int recursiveDigitSum(int n) {
         return n < 10 ? n : recursiveDigitSum(String.valueOf(n).chars().map(c -> c - '0').sum());
     }
+
+    @Test // 40. Find common elements between three lists
+    public void testFindCommonElementsAmongThreeLists() {
+        List<Integer> l1 = List.of(1, 2, 3), l2 = List.of(2, 3, 4), l3 = List.of(3, 4, 5);
+        List<Integer> result = l1.stream().filter(l2::contains).filter(l3::contains).distinct().toList();
+        System.out.printf("Input: %s, %s, %s | Output (common): %s%n", l1, l2, l3, result);
+        assertEquals(List.of(3), result);
+    }
 }
