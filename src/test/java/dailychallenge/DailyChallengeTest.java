@@ -501,4 +501,16 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s, Threshold: %d | Output (count): %d%n", input, threshold, count);
         assertEquals(2, count);
     }
+
+    @Test // 37. Sum the digits of a number recursively
+    public void testRecursiveDigitSum() {
+        int input = 942;
+        int result = recursiveDigitSum(input);
+        System.out.printf("Input: %d | Output (recursive digit sum): %d%n", input, result);
+        assertEquals(6, result);
+    }
+
+    private int recursiveDigitSum(int n) {
+        return n < 10 ? n : recursiveDigitSum(String.valueOf(n).chars().map(c -> c - '0').sum());
+    }
 }
