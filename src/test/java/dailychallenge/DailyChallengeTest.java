@@ -532,4 +532,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (intersection): %s%n", input, result);
         assertEquals(List.of(3), result);
     }
+
+    @Test // 40. Check if a string is a pangram
+    public void testIsPangram() {
+        String input = "The quick brown fox jumps over the lazy dog";
+        boolean result = input.chars().filter(Character::isLetter).map(Character::toLowerCase).distinct().count() == 26;
+        System.out.printf("Input: \"%s\" | Output (is pangram): %b%n", input, result);
+        assertTrue(result);
+    }
 }
