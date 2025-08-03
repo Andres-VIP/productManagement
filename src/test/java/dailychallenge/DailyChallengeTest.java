@@ -540,4 +540,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: \"%s\" | Output (is pangram): %b%n", input, result);
         assertTrue(result);
     }
+
+    @Test // 41. Find the longest common prefix in a list of strings
+    public void testFindLongestCommonPrefix() {
+        var input = List.of("flower", "flow", "flight");
+        var result = input.stream().reduce((a, b) -> { while (!b.startsWith(a)) a = a.substring(0, a.length() - 1); return a; }).orElse("");
+        System.out.printf("Input: %s | Output (longest common prefix): \"%s\"%n", input, result);
+        assertEquals("fl", result);
+    }
 }
