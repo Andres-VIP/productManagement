@@ -558,4 +558,12 @@ public class DailyChallengeTest {
         System.out.printf("Input: \"%s\" | Output (prefixes): %s%n", input, result);
         assertEquals(List.of("a", "ab", "abc"), result);
     }
+
+    @Test // 43. Remove odd numbers from a list
+    public void testRemoveOddNumbers() {
+        List<Integer> input = List.of(1, 2, 3, 4, 5);
+        List<Integer> result = input.stream().filter(i -> i % 2 == 0).toList();
+        System.out.printf("Input: %s | Output (evens only): %s%n", input, result);
+        assertEquals(List.of(2, 4), result);
+    }
 }
