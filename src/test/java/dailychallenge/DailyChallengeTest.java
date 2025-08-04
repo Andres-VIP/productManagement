@@ -548,4 +548,14 @@ public class DailyChallengeTest {
         System.out.printf("Input: %s | Output (longest common prefix): \"%s\"%n", input, result);
         assertEquals("fl", result);
     }
+
+    @Test // 42. Generate all prefixes of a string
+    public void testGenerateAllPrefixes() {
+        String input = "abc";
+        List<String> result = IntStream.rangeClosed(1, input.length())
+                .mapToObj(i -> input.substring(0, i))
+                .toList();
+        System.out.printf("Input: \"%s\" | Output (prefixes): %s%n", input, result);
+        assertEquals(List.of("a", "ab", "abc"), result);
+    }
 }
