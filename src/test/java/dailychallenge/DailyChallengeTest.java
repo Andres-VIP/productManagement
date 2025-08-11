@@ -497,4 +497,15 @@ public class DailyChallengeTest {
         assertEquals(List.of(2, 4), result,
                 () -> "Input: " + input + " | Output (evens only): " + result);
     }
+
+    // 44. FizzBuzz
+    @Test
+    public void testFizzBuzz() {
+        int n = 15;
+        List<String> result = IntStream.rangeClosed(1, n)
+                .mapToObj(i -> i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : String.valueOf(i))
+                .toList();
+        assertEquals(List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"), result,
+                () -> "Input: " + n + " | Output (FizzBuzz): " + result);
+    }
 }
