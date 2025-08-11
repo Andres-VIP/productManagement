@@ -508,4 +508,21 @@ public class DailyChallengeTest {
         assertEquals(List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"), result,
                 () -> "Input: " + n + " | Output (FizzBuzz): " + result);
     }
+
+    // 45. Binary search
+    @Test
+    void testBinarySearch(){
+        int[] a={1,3,5,7,9};
+        assertEquals(2,binarySearch(a,5),()->"Input:"+Arrays.toString(a)+" | t=5");
+        assertEquals(-1,binarySearch(a,6),()->"Input:"+Arrays.toString(a)+" | t=6");
+    }
+    private int binarySearch(int[] a,int t){
+        int l=0,r=a.length-1;
+        while(l<=r){
+            int m=l+(r-l)/2;
+            if(a[m]==t) return m;
+            if(a[m]<t) l=m+1; else r=m-1;
+        }
+        return -1;
+    }
 }
