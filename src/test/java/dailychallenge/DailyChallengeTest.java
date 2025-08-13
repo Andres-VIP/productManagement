@@ -525,4 +525,19 @@ public class DailyChallengeTest {
         }
         return -1;
     }
+
+    // 46. Balanced brackets
+    @Test
+    void testBalancedBrackets(){
+        assertTrue(isBalanced("({[]})"));
+        assertFalse(isBalanced("([)]"));
+    }
+    private boolean isBalanced(String s){
+        Deque<Character> st=new ArrayDeque<>();
+        Map<Character,Character> m=Map.of(')','(',']','[','}','{');
+        for(char c:s.toCharArray())
+            if(m.containsValue(c)) st.push(c);
+            else if(m.containsKey(c)&&(st.isEmpty()||st.pop()!=m.get(c))) return false;
+        return st.isEmpty();
+    }
 }
