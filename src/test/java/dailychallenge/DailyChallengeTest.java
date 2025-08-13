@@ -540,4 +540,17 @@ public class DailyChallengeTest {
             else if(m.containsKey(c)&&(st.isEmpty()||st.pop()!=m.get(c))) return false;
         return st.isEmpty();
     }
+
+    // 47. Two Sum (índices)
+    @Test
+    void testTwoSum(){
+        int[] a1={3,2,4}, a2={2,7,11,15};
+        assertArrayEquals(new int[]{1,2}, twoSum(a1,6),()->"Input:"+Arrays.toString(a1)+" | t=6");
+        assertArrayEquals(new int[]{0,1}, twoSum(a2,9),()->"Input:"+Arrays.toString(a2)+" | t=9");
+    }
+    private int[] twoSum(int[] a,int t){
+        Map<Integer,Integer> m=new HashMap<>();
+        for(int i=0;i<a.length;i++){ int c=t-a[i]; if(m.containsKey(c)) return new int[]{m.get(c),i}; m.put(a[i],i); }
+        return new int[]{-1,-1};
+    }
 }
