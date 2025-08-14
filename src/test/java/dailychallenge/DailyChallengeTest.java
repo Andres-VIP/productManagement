@@ -553,4 +553,17 @@ public class DailyChallengeTest {
         for(int i=0;i<a.length;i++){ int c=t-a[i]; if(m.containsKey(c)) return new int[]{m.get(c),i}; m.put(a[i],i); }
         return new int[]{-1,-1};
     }
+
+    // 48. Maximum subarray sum (Kadane)
+    @Test
+    void testMaxSubarraySum(){
+        int[] a={-2,1,-3,4,-1,2,1,-5,4}, b={-3,-2,-5};
+        assertEquals(6, maxSubarraySum(a), ()->"Input:"+Arrays.toString(a)+" | Expected 6 (4,-1,2,1)");
+        assertEquals(-2, maxSubarraySum(b), ()->"Input:"+Arrays.toString(b)+" | Expected -2");
+    }
+    private int maxSubarraySum(int[] a){
+        int max=a[0], cur=a[0];
+        for(int i=1;i<a.length;i++){ cur=Math.max(a[i],cur+a[i]); max=Math.max(max,cur); }
+        return max;
+    }
 }
