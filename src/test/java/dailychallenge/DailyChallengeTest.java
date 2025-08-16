@@ -566,4 +566,24 @@ public class DailyChallengeTest {
         for(int i=1;i<a.length;i++){ cur=Math.max(a[i],cur+a[i]); max=Math.max(max,cur); }
         return max;
     }
+
+    // 49. Move zeros to end (stable)
+    @Test
+    void testMoveZerosToEnd() {
+        int[] a = {0, 1, 0, 3, 12};
+        int[] b = {1, 3, 12, 0, 0};
+        int[] c = {0, 0};
+        int[] d = {1, 2, 3};
+
+        assertArrayEquals(b, moveZerosToEnd(a), () -> "Input:" + Arrays.toString(a));
+        assertArrayEquals(new int[]{0, 0}, moveZerosToEnd(c), () -> "Input:" + Arrays.toString(c));
+        assertArrayEquals(new int[]{1, 2, 3}, moveZerosToEnd(d), () -> "Input:" + Arrays.toString(d));
+    }
+
+    private int[] moveZerosToEnd(int[] nums) {
+        int[] res = new int[nums.length];
+        int i = 0;
+        for (int n : nums) if (n != 0) res[i++] = n; // los ceros quedan al final por defecto
+        return res;
+    }
 }
