@@ -586,4 +586,38 @@ public class DailyChallengeTest {
         for (int n : nums) if (n != 0) res[i++] = n; // los ceros quedan al final por defecto
         return res;
     }
+
+    // 50. Run-Length Encoding (RLE)
+    @Test
+    public void testRunLengthEncoding() {
+        String in1 = "aaabbcaaaa";
+        String in2 = "abcd";
+        String in3 = "";
+        String in4 = "a";          // edge: un solo caracter
+        String in5 = "aabbaa";     // grupos múltiples
+
+        String r1 = rle(in1);
+        String r2 = rle(in2);
+        String r3 = rle(in3);
+        String r4 = rle(in4);
+        String r5 = rle(in5);
+
+        assertEquals("a3b2c1a4", r1, () -> "Input: " + in1 + " | Output: " + r1);
+        assertEquals("a1b1c1d1", r2, () -> "Input: " + in2 + " | Output: " + r2);
+        assertEquals("", r3, () -> "Input: " + in3 + " | Output: " + r3);
+        assertEquals("a1", r4, () -> "Input: " + in4 + " | Output: " + r4);
+        assertEquals("a2b2a2", r5, () -> "Input: " + in5 + " | Output: " + r5);
+    }
+
+    private String rle(String s) {
+        if (s == null || s.isEmpty()) return "";
+        StringBuilder out = new StringBuilder();
+        int count = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i - 1)) count++;
+            else { out.append(s.charAt(i - 1)).append(count); count = 1; }
+        }
+        out.append(s.charAt(s.length() - 1)).append(count);
+        return out.toString();
+    }
 }
