@@ -620,4 +620,13 @@ public class DailyChallengeTest {
         out.append(s.charAt(s.length() - 1)).append(count);
         return out.toString();
     }
+    // 51. Majority element (> n/2) - Boyer-Moore
+    @Test
+    void testMajorityElement(){
+        int[] a={2,2,1,2,3,2,2};
+        assertEquals(2, majority(a), ()->"Input:"+Arrays.toString(a));
+    }
+    private int majority(int[] a){
+        int c=0, cand=0; for(int x:a){ if(c==0)cand=x; c+= (x==cand)?1:-1; } return cand;
+    }
 }
