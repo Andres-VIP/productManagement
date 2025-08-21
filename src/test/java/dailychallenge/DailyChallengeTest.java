@@ -629,4 +629,22 @@ public class DailyChallengeTest {
     private int majority(int[] a){
         int c=0, cand=0; for(int x:a){ if(c==0)cand=x; c+= (x==cand)?1:-1; } return cand;
     }
+
+    // 52. Best time to buy and sell stock (single transaction)
+    @Test
+    public void testMaxProfitSingleTransaction() {
+        int[] input1 = {7, 1, 5, 3, 6, 4};
+        int min1 = Integer.MAX_VALUE, profit1 = 0;
+        for (int p : input1) { min1 = Math.min(min1, p); profit1 = Math.max(profit1, p - min1); }
+        int result1 = profit1;
+        assertEquals(5, result1,
+                () -> "Input: " + Arrays.toString(input1) + " | Output: " + result1);
+
+        int[] input2 = {7, 6, 4, 3, 1};
+        int min2 = Integer.MAX_VALUE, profit2 = 0;
+        for (int p : input2) { min2 = Math.min(min2, p); profit2 = Math.max(profit2, p - min2); }
+        int result2 = profit2;
+        assertEquals(0, result2,
+                () -> "Input: " + Arrays.toString(input2) + " | Output: " + result2);
+    }
 }
