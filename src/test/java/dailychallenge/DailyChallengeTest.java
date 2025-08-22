@@ -647,4 +647,18 @@ public class DailyChallengeTest {
         assertEquals(0, result2,
                 () -> "Input: " + Arrays.toString(input2) + " | Output: " + result2);
     }
+
+    // 53. Isogram check (no repeated letters)
+    @Test
+    public void testIsIsogram() {
+        String input1 = "lumberjacks";
+        boolean result1 = input1.toLowerCase().chars().distinct().count() == input1.length();
+        assertTrue(result1,
+                () -> "Input: \"" + input1 + "\" | Output (is isogram): " + result1);
+
+        String input2 = "programming";
+        boolean result2 = input2.toLowerCase().chars().distinct().count() == input2.length();
+        assertFalse(result2,
+                () -> "Input: \"" + input2 + "\" | Output (is isogram): " + result2);
+    }
 }
