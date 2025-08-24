@@ -661,4 +661,18 @@ public class DailyChallengeTest {
         assertFalse(result2,
                 () -> "Input: \"" + input2 + "\" | Output (is isogram): " + result2);
     }
+
+    // 54. Monotonic array check
+    @Test
+    void testIsMonotonic(){
+        int[] a={1,2,2,3}, b={6,5,4,4}, c={1,3,2};
+        assertTrue(isMonotonic(a), ()->"Input:"+Arrays.toString(a));
+        assertTrue(isMonotonic(b), ()->"Input:"+Arrays.toString(b));
+        assertFalse(isMonotonic(c), ()->"Input:"+Arrays.toString(c));
+    }
+    private boolean isMonotonic(int[] a){
+        boolean nonDec=IntStream.range(0,a.length-1).allMatch(i->a[i]<=a[i+1]);
+        boolean nonInc=IntStream.range(0,a.length-1).allMatch(i->a[i]>=a[i+1]);
+        return nonDec||nonInc;
+    }
 }
