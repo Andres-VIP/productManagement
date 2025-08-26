@@ -714,4 +714,35 @@ public class DailyChallengeTest {
             current.deleteCharAt(current.length() - 1);
         }
     }
+
+    // 56. Can construct word from letters
+    @Test
+    public void testCanConstructWordFromLetters() {
+        List<Character> letters = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g');
+
+        assertTrue(canConstruct("cage", letters),
+                "Word: 'cage' | Letters: " + letters + " | Output: true");
+
+        assertFalse(canConstruct("feed", letters),
+                "Word: 'feed' | Letters: " + letters + " | Output: false");
+
+        assertTrue(canConstruct("bed", letters),
+                "Word: 'bed' | Letters: " + letters + " | Output: true");
+    }
+
+    private boolean canConstruct(String word, List<Character> letters) {
+        if (word == null || letters == null) return false;
+
+        Map<Character, Long> available = new HashMap<>();
+        for (char c : letters) {
+            available.put(c, available.getOrDefault(c, 0L) + 1);
+        }
+
+        for (char c : word.toCharArray()) {
+            if (!available.containsKey(c) || available.get(c) == 0) return false;
+            available.put(c, available.get(c) - 1);
+        }
+
+        return true;
+    }
 }
