@@ -745,4 +745,31 @@ public class DailyChallengeTest {
 
         return true;
     }
+
+    // 57. Count sum combinations with repetition
+    @Test
+    public void testCountSumCombinations() {
+        int[] nums = {1, 2, 3};
+        Map<Integer, Integer> memo = new HashMap<>();
+
+        assertEquals(4, count(nums, 4, memo));
+        memo.clear();
+        assertEquals(7, count(nums, 5, memo));
+        memo.clear();
+        assertEquals(1, count(nums, 1, memo));
+        memo.clear();
+        assertEquals(0, count(nums, 0, memo));
+        memo.clear();
+        assertEquals(0, count(new int[]{}, 3, memo));
+    }
+
+    // Lógica compacta de recursividad + memo
+    private int count(int[] nums, int t, Map<Integer, Integer> m) {
+        if (t == 0) return 1;
+        if (m.containsKey(t)) return m.get(t);
+        int r = 0;
+        for (int n : nums) if (t - n >= 0) r += count(nums, t - n, m);
+        m.put(t, r);
+        return r;
+    }
 }
