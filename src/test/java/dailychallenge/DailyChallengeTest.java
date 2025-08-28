@@ -763,7 +763,6 @@ public class DailyChallengeTest {
         assertEquals(0, count(new int[]{}, 3, memo));
     }
 
-    // Lógica compacta de recursividad + memo
     private int count(int[] nums, int t, Map<Integer, Integer> m) {
         if (t == 0) return 1;
         if (m.containsKey(t)) return m.get(t);
@@ -771,5 +770,38 @@ public class DailyChallengeTest {
         for (int n : nums) if (t - n >= 0) r += count(nums, t - n, m);
         m.put(t, r);
         return r;
+    }
+
+    // 58. Can form word from multiple source words
+    @Test
+    public void testCanFormTargetFromWords() {
+        List<String> source1 = List.of("java", "code");
+        String target1 = "evade";
+        assertTrue(canForm(source1, target1),
+                () -> "Source: " + source1 + " | Target: \"" + target1 + "\" | Output: true");
+
+        List<String> source2 = List.of("hello", "world");
+        String target2 = "hold";
+        assertTrue(canForm(source2, target2),
+                () -> "Source: " + source2 + " | Target: \"" + target2 + "\" | Output: true");
+
+        List<String> source3 = List.of("java");
+        String target3 = "javascript";
+        assertFalse(canForm(source3, target3),
+                () -> "Source: " + source3 + " | Target: \"" + target3 + "\" | Output: false");
+    }
+
+    private boolean canForm(List<String> words, String target) {
+        Map<Character, Long> available = words.stream()
+                .flatMapToInt(String::chars)
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (char c : target.toCharArray()) {
+            if (!available.containsKey(c) || available.get(c) == 0) return false;
+            available.put(c, available.get(c) - 1);
+        }
+
+        return true;
     }
 }
