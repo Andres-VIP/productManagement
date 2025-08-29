@@ -804,4 +804,27 @@ public class DailyChallengeTest {
 
         return true;
     }
+
+    // 59. Unique paths in grid (m x n)
+    @Test
+    void testCountUniquePathsInGrid() {
+        assertEquals(6, uniquePaths(3, 3), "Grid 3x3 → Output: 6");
+        assertEquals(28, uniquePaths(3, 7), "Grid 3x7 → Output: 28");
+        assertEquals(1, uniquePaths(1, 1), "Grid 1x1 → Output: 1");
+    }
+
+    private int uniquePaths(int m, int n) {
+        Map<String, Integer> memo = new HashMap<>();
+        return countPaths(0, 0, m, n, memo);
+    }
+
+    private int countPaths(int i, int j, int m, int n, Map<String, Integer> memo) {
+        if (i >= m || j >= n) return 0;
+        if (i == m - 1 && j == n - 1) return 1;
+        String key = i + "," + j;
+        if (memo.containsKey(key)) return memo.get(key);
+        int paths = countPaths(i + 1, j, m, n, memo) + countPaths(i, j + 1, m, n, memo);
+        memo.put(key, paths);
+        return paths;
+    }
 }
