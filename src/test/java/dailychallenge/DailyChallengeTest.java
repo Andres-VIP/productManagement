@@ -827,4 +827,28 @@ public class DailyChallengeTest {
         memo.put(key, paths);
         return paths;
     }
+
+    // 60. Generate all subsets (power set)
+    @Test
+    void testGenerateAllSubsets() {
+        int[] input = {1, 2};
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(input, 0, new ArrayList<>(), result);
+
+        List<List<Integer>> expected = List.of(
+                List.of(), List.of(1), List.of(2), List.of(1, 2)
+        );
+
+        assertTrue(result.containsAll(expected) && expected.containsAll(result),
+                () -> "Input: " + Arrays.toString(input) + " | Output: " + result);
+    }
+
+    private void backtrack(int[] nums, int start, List<Integer> current, List<List<Integer>> res) {
+        res.add(new ArrayList<>(current));
+        for (int i = start; i < nums.length; i++) {
+            current.add(nums[i]);
+            backtrack(nums, i + 1, current, res);
+            current.remove(current.size() - 1);
+        }
+    }
 }
