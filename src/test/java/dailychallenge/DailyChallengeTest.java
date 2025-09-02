@@ -851,4 +851,17 @@ public class DailyChallengeTest {
             current.remove(current.size() - 1);
         }
     }
+
+    // 61. Check if all characters in a string are unique
+    @Test
+    public void testAllUniqueCharacters() {
+        String input1 = "abcdefg";
+        boolean result1 = input1.chars().distinct().count() == input1.length();
+        assertTrue(result1, () -> "Input: \"" + input1 + "\" | Output (all unique): " + result1);
+
+
+        String input2 = "hello";
+        boolean result2 = input2.chars().distinct().count() == input2.length();
+        assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (all unique): " + result2);
+    }
 }
