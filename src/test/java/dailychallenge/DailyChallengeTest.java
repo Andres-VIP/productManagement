@@ -882,4 +882,28 @@ public class DailyChallengeTest {
                 .count() < input2.chars().filter(Character::isLetter).count();
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (has duplicate letters): " + result2);
     }
+
+    // 63. Check if a matrix is symmetric
+    @Test
+    public void testIsMatrixSymmetric() {
+        List<List<Integer>> matrix1 = List.of(
+                List.of(1, 2, 3),
+                List.of(2, 4, 5),
+                List.of(3, 5, 6)
+        );
+        boolean result1 = IntStream.range(0, matrix1.size())
+                .allMatch(i -> IntStream.range(0, matrix1.size())
+                        .allMatch(j -> matrix1.get(i).get(j).equals(matrix1.get(j).get(i))));
+        assertTrue(result1, () -> "Input: " + matrix1 + " | Output (symmetric): " + result1);
+
+        List<List<Integer>> matrix2 = List.of(
+                List.of(1, 0, 3),
+                List.of(2, 4, 5),
+                List.of(3, 5, 6)
+        );
+        boolean result2 = IntStream.range(0, matrix2.size())
+                .allMatch(i -> IntStream.range(0, matrix2.size())
+                        .allMatch(j -> matrix2.get(i).get(j).equals(matrix2.get(j).get(i))));
+        assertFalse(result2, () -> "Input: " + matrix2 + " | Output (symmetric): " + result2);
+    }
 }
