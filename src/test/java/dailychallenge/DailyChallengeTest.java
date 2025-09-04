@@ -864,4 +864,22 @@ public class DailyChallengeTest {
         boolean result2 = input2.chars().distinct().count() == input2.length();
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (all unique): " + result2);
     }
+
+    // 62. Contains duplicate letters
+    @Test
+    public void testHasDuplicateLetters() {
+        String input1 = "ChatGPT rocks!";
+        boolean result1 = input1.toLowerCase().chars()
+                .filter(Character::isLetter)
+                .distinct()
+                .count() < input1.chars().filter(Character::isLetter).count();
+        assertTrue(result1, () -> "Input: \"" + input1 + "\" | Output (has duplicate letters): " + result1);
+
+        String input2 = "Bot";
+        boolean result2 = input2.toLowerCase().chars()
+                .filter(Character::isLetter)
+                .distinct()
+                .count() < input2.chars().filter(Character::isLetter).count();
+        assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (has duplicate letters): " + result2);
+    }
 }
