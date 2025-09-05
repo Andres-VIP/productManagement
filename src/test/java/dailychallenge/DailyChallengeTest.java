@@ -906,4 +906,16 @@ public class DailyChallengeTest {
                         .allMatch(j -> matrix2.get(i).get(j).equals(matrix2.get(j).get(i))));
         assertFalse(result2, () -> "Input: " + matrix2 + " | Output (symmetric): " + result2);
     }
+
+    // 64. Check if string contains only alphabetic letters
+    @Test
+    public void testIsOnlyAlphabetic() {
+        String input1 = "JavaRocks";
+        boolean result1 = input1.chars().allMatch(Character::isLetter);
+        assertTrue(result1, () -> "Input: \"" + input1 + "\" | Output (only letters): " + result1);
+
+        String input2 = "Code123!";
+        boolean result2 = input2.chars().allMatch(Character::isLetter);
+        assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (only letters): " + result2);
+    }
 }
