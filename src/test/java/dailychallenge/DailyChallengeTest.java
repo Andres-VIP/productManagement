@@ -918,4 +918,28 @@ public class DailyChallengeTest {
         boolean result2 = input2.chars().allMatch(Character::isLetter);
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (only letters): " + result2);
     }
+
+    // 65. Check if number is semiprime
+    @Test
+    public void testIsSemiprime() {
+        int input1 = 9; // 3 * 3
+        boolean result1 = countPrimeFactors(input1) == 2;
+        assertTrue(result1, () -> "Input: " + input1 + " | Output (is semiprime): " + result1);
+
+        int input2 = 8; // 2 * 2 * 2
+        boolean result2 = countPrimeFactors(input2) == 2;
+        assertFalse(result2, () -> "Input: " + input2 + " | Output (is semiprime): " + result2);
+    }
+
+    private int countPrimeFactors(int n) {
+        int count = 0;
+        for (int i = 2; i <= n / i; i++) {
+            while (n % i == 0) {
+                count++;
+                n /= i;
+            }
+        }
+        if (n > 1) count++; // cuenta el último primo si queda
+        return count;
+    }
 }
