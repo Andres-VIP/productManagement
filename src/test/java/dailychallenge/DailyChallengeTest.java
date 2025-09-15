@@ -942,4 +942,28 @@ public class DailyChallengeTest {
         if (n > 1) count++; // cuenta el último primo si queda
         return count;
     }
+
+    // 66. Check if string is a valid basic email
+    @Test
+    public void testIsValidBasicEmail() {
+        String input1 = "user@example.com";
+        boolean result1 = input1.contains("@") &&
+                input1.indexOf('@') > 0 &&
+                input1.indexOf('@') == input1.lastIndexOf('@') &&
+                !input1.contains("@.") &&
+                input1.indexOf('.') > input1.indexOf('@') + 1 &&
+                !input1.endsWith(".") &&
+                !input1.startsWith("@");
+        assertTrue(result1, () -> "Input: \"" + input1 + "\" | Output (valid email): " + result1);
+
+        String input2 = "invalidemail@.com";
+        boolean result2 = input2.contains("@") &&
+                input2.indexOf('@') > 0 &&
+                input2.indexOf('@') == input2.lastIndexOf('@') &&
+                !input2.contains("@.") &&
+                input2.indexOf('.') > input2.indexOf('@') + 1 &&
+                !input2.endsWith(".") &&
+                !input2.startsWith("@");
+        assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (valid email): " + result2);
+    }
 }
