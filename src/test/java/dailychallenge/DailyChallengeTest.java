@@ -966,4 +966,16 @@ public class DailyChallengeTest {
                 !input2.startsWith("@");
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (valid email): " + result2);
     }
+
+    // 67. Count unique words in a sentence (case-insensitive, ignore punctuation)
+    @Test
+    public void testCountUniqueWords() {
+        String input = "Hello, hello! How are you?";
+        long result = Arrays.stream(input.toLowerCase().split("\\W+"))
+                .filter(s -> !s.isBlank())
+                .distinct()
+                .count();
+        assertEquals(4, result,
+                () -> "Input: \"" + input + "\" | Output (unique word count): " + result);
+    }
 }
