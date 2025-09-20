@@ -190,14 +190,16 @@ public class DailyChallengeTest {
     }
 
     private List<List<Integer>> generatePascalTriangle(int rows) {
-        return IntStream.range(0, rows)
-                .mapToObj(row -> IntStream.rangeClosed(0, row)
-                        .map(col -> (col == 0 || col == row) ? 1 :
-                                generatePascalTriangle(rows-1).get(row-1).get(col-1) +
-                                        generatePascalTriangle(rows-1).get(row-1).get(col))
-                        .boxed()
-                        .toList())
-                .toList();
+        List<List<Integer>> triangle = new ArrayList<>();
+        for (int row = 0; row < rows; row++) {
+            List<Integer> current = new ArrayList<>(row + 1);
+            for (int col = 0; col <= row; col++) {
+                if (col == 0 || col == row) current.add(1);
+                else current.add(triangle.get(row - 1).get(col - 1) + triangle.get(row - 1).get(col));
+            }
+            triangle.add(current);
+        }
+        return triangle;
     }
 
     // 16. Reverse string
@@ -392,9 +394,9 @@ public class DailyChallengeTest {
                 () -> "Input: \"" + input + "\" | Output: \"" + result + "\"");
     }
 
-    // 33. Count character occurrences
+    // 37. Count specific character occurrences
     @Test
-    public void testCountCharOccurrences() {
+    public void testCountSpecificCharOccurrences() {
         String input = "banana";
         char target = 'a';
         long result = input.chars()
@@ -437,7 +439,7 @@ public class DailyChallengeTest {
                 () -> "Input: " + input + ", Threshold: " + threshold + " | Output (count): " + result);
     }
 
-    // 38. Common elements in three lists
+    // 36. Common elements in three lists
     @Test
     public void testFindCommonElements() {
         List<Integer> l1 = List.of(1, 2, 3);
@@ -451,7 +453,7 @@ public class DailyChallengeTest {
                 () -> "Input: " + l1 + ", " + l2 + ", " + l3 + " | Output (common): " + result);
     }
 
-    // 40. Pangram check
+    // 38. Pangram check
     @Test
     public void testIsPangram() {
         String input = "The quick brown fox jumps over the lazy dog";
@@ -463,7 +465,7 @@ public class DailyChallengeTest {
                 () -> "Input: \"" + input + "\" | Output (is pangram): " + result);
     }
 
-    // 41. Longest common prefix
+    // 40. Longest common prefix
     @Test
     public void testFindLongestCommonPrefix() {
         List<String> input = List.of("flower", "flow", "flight");
@@ -476,7 +478,7 @@ public class DailyChallengeTest {
                 () -> "Input: " + input + " | Output (longest common prefix): \"" + result + "\"");
     }
 
-    // 42. Generate string prefixes
+    // 41. Generate string prefixes
     @Test
     public void testGenerateAllPrefixes() {
         String input = "abc";
@@ -487,7 +489,7 @@ public class DailyChallengeTest {
                 () -> "Input: \"" + input + "\" | Output (prefixes): " + result);
     }
 
-    // 43. Filter even numbers
+    // 42. Filter even numbers
     @Test
     public void testRemoveOddNumbers() {
         List<Integer> input = List.of(1, 2, 3, 4, 5);
@@ -498,7 +500,7 @@ public class DailyChallengeTest {
                 () -> "Input: " + input + " | Output (evens only): " + result);
     }
 
-    // 44. FizzBuzz
+    // 43. FizzBuzz
     @Test
     public void testFizzBuzz() {
         int n = 15;
@@ -509,9 +511,9 @@ public class DailyChallengeTest {
                 () -> "Input: " + n + " | Output (FizzBuzz): " + result);
     }
 
-    // 45. Binary search
+    // 44. Binary search
     @Test
-    void testBinarySearch(){
+    public void testBinarySearch(){
         int[] a={1,3,5,7,9};
         assertEquals(2,binarySearch(a,5),()->"Input:"+Arrays.toString(a)+" | t=5");
         assertEquals(-1,binarySearch(a,6),()->"Input:"+Arrays.toString(a)+" | t=6");
@@ -526,9 +528,9 @@ public class DailyChallengeTest {
         return -1;
     }
 
-    // 46. Balanced brackets
+    // 45. Balanced brackets
     @Test
-    void testBalancedBrackets(){
+    public void testBalancedBrackets(){
         assertTrue(isBalanced("({[]})"));
         assertFalse(isBalanced("([)]"));
     }
@@ -541,9 +543,9 @@ public class DailyChallengeTest {
         return st.isEmpty();
     }
 
-    // 47. Two Sum (índices)
+    // 46. Two Sum (índices)
     @Test
-    void testTwoSum(){
+    public void testTwoSum(){
         int[] a1={3,2,4}, a2={2,7,11,15};
         assertArrayEquals(new int[]{1,2}, twoSum(a1,6),()->"Input:"+Arrays.toString(a1)+" | t=6");
         assertArrayEquals(new int[]{0,1}, twoSum(a2,9),()->"Input:"+Arrays.toString(a2)+" | t=9");
@@ -554,9 +556,9 @@ public class DailyChallengeTest {
         return new int[]{-1,-1};
     }
 
-    // 48. Maximum subarray sum (Kadane)
+    // 47. Maximum subarray sum (Kadane)
     @Test
-    void testMaxSubarraySum(){
+    public void testMaxSubarraySum(){
         int[] a={-2,1,-3,4,-1,2,1,-5,4}, b={-3,-2,-5};
         assertEquals(6, maxSubarraySum(a), ()->"Input:"+Arrays.toString(a)+" | Expected 6 (4,-1,2,1)");
         assertEquals(-2, maxSubarraySum(b), ()->"Input:"+Arrays.toString(b)+" | Expected -2");
@@ -567,9 +569,9 @@ public class DailyChallengeTest {
         return max;
     }
 
-    // 49. Move zeros to end (stable)
+    // 48. Move zeros to end (stable)
     @Test
-    void testMoveZerosToEnd() {
+    public void testMoveZerosToEnd() {
         int[] a = {0, 1, 0, 3, 12};
         int[] b = {1, 3, 12, 0, 0};
         int[] c = {0, 0};
@@ -587,7 +589,7 @@ public class DailyChallengeTest {
         return res;
     }
 
-    // 50. Run-Length Encoding (RLE)
+    // 49. Run-Length Encoding (RLE)
     @Test
     public void testRunLengthEncoding() {
         String in1 = "aaabbcaaaa";
@@ -620,9 +622,9 @@ public class DailyChallengeTest {
         out.append(s.charAt(s.length() - 1)).append(count);
         return out.toString();
     }
-    // 51. Majority element (> n/2) - Boyer-Moore
+    // 50. Majority element (> n/2) - Boyer-Moore
     @Test
-    void testMajorityElement(){
+    public void testMajorityElement(){
         int[] a={2,2,1,2,3,2,2};
         assertEquals(2, majority(a), ()->"Input:"+Arrays.toString(a));
     }
@@ -630,7 +632,7 @@ public class DailyChallengeTest {
         int c=0, cand=0; for(int x:a){ if(c==0)cand=x; c+= (x==cand)?1:-1; } return cand;
     }
 
-    // 52. Best time to buy and sell stock (single transaction)
+    // 51. Best time to buy and sell stock (single transaction)
     @Test
     public void testMaxProfitSingleTransaction() {
         int[] input1 = {7, 1, 5, 3, 6, 4};
@@ -648,7 +650,7 @@ public class DailyChallengeTest {
                 () -> "Input: " + Arrays.toString(input2) + " | Output: " + result2);
     }
 
-    // 53. Isogram check (no repeated letters)
+    // 52. Isogram check (no repeated letters)
     @Test
     public void testIsIsogram() {
         String input1 = "lumberjacks";
@@ -662,9 +664,9 @@ public class DailyChallengeTest {
                 () -> "Input: \"" + input2 + "\" | Output (is isogram): " + result2);
     }
 
-    // 54. Monotonic array check
+    // 53. Monotonic array check
     @Test
-    void testIsMonotonic(){
+    public void testIsMonotonic(){
         int[] a={1,2,2,3}, b={6,5,4,4}, c={1,3,2};
         assertTrue(isMonotonic(a), ()->"Input:"+Arrays.toString(a));
         assertTrue(isMonotonic(b), ()->"Input:"+Arrays.toString(b));
@@ -676,7 +678,7 @@ public class DailyChallengeTest {
         return nonDec||nonInc;
     }
 
-    // 55. Phone letter combinations (T9 mapping)
+    // 54. Phone letter combinations (T9 mapping)
     @Test
     public void testGeneratePhoneLetterCombinations() {
         String input = "23";
@@ -715,7 +717,7 @@ public class DailyChallengeTest {
         }
     }
 
-    // 56. Can construct word from letters
+    // 55. Can construct word from letters
     @Test
     public void testCanConstructWordFromLetters() {
         List<Character> letters = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g');
@@ -746,33 +748,33 @@ public class DailyChallengeTest {
         return true;
     }
 
-    // 57. Count sum combinations with repetition
+    // 56. Count sum combinations with repetition
     @Test
     public void testCountSumCombinations() {
         int[] nums = {1, 2, 3};
-        Map<Integer, Integer> memo = new HashMap<>();
 
-        assertEquals(4, count(nums, 4, memo));
-        memo.clear();
-        assertEquals(7, count(nums, 5, memo));
-        memo.clear();
-        assertEquals(1, count(nums, 1, memo));
-        memo.clear();
-        assertEquals(0, count(nums, 0, memo));
-        memo.clear();
-        assertEquals(0, count(new int[]{}, 3, memo));
+        assertEquals(4, count(nums, 4));
+        assertEquals(5, count(nums, 5));
+        assertEquals(1, count(nums, 1));
+        assertEquals(1, count(nums, 0));
+        assertEquals(0, count(new int[]{}, 3));
     }
 
-    private int count(int[] nums, int t, Map<Integer, Integer> m) {
+    private int count(int[] nums, int t) {
+        if (nums == null || nums.length == 0) return 0;
+        if (t < 0) return 0;
         if (t == 0) return 1;
-        if (m.containsKey(t)) return m.get(t);
-        int r = 0;
-        for (int n : nums) if (t - n >= 0) r += count(nums, t - n, m);
-        m.put(t, r);
-        return r;
+        
+        int[] dp = new int[t + 1];
+        dp[0] = 1;
+        for (int n : nums) {
+            if (n <= 0) continue;
+            for (int s = n; s <= t; s++) dp[s] += dp[s - n];
+        }
+        return dp[t];
     }
 
-    // 58. Can form word from multiple source words
+    // 57. Can form word from multiple source words
     @Test
     public void testCanFormTargetFromWords() {
         List<String> source1 = List.of("java", "code");
@@ -805,9 +807,9 @@ public class DailyChallengeTest {
         return true;
     }
 
-    // 59. Unique paths in grid (m x n)
+    // 58. Unique paths in grid (m x n)
     @Test
-    void testCountUniquePathsInGrid() {
+    public void testCountUniquePathsInGrid() {
         assertEquals(6, uniquePaths(3, 3), "Grid 3x3 → Output: 6");
         assertEquals(28, uniquePaths(3, 7), "Grid 3x7 → Output: 28");
         assertEquals(1, uniquePaths(1, 1), "Grid 1x1 → Output: 1");
@@ -828,9 +830,9 @@ public class DailyChallengeTest {
         return paths;
     }
 
-    // 60. Generate all subsets (power set)
+    // 59. Generate all subsets (power set)
     @Test
-    void testGenerateAllSubsets() {
+    public void testGenerateAllSubsets() {
         int[] input = {1, 2};
         List<List<Integer>> result = new ArrayList<>();
         backtrack(input, 0, new ArrayList<>(), result);
@@ -852,7 +854,7 @@ public class DailyChallengeTest {
         }
     }
 
-    // 61. Check if all characters in a string are unique
+    // 60. Check if all characters in a string are unique
     @Test
     public void testAllUniqueCharacters() {
         String input1 = "abcdefg";
@@ -865,9 +867,9 @@ public class DailyChallengeTest {
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (all unique): " + result2);
     }
 
-    // 62. Contains duplicate letters
+    // 39. Contains duplicate letters in word
     @Test
-    public void testHasDuplicateLetters() {
+    public void testHasDuplicateLettersInWord() {
         String input1 = "ChatGPT rocks!";
         boolean result1 = input1.toLowerCase().chars()
                 .filter(Character::isLetter)
@@ -883,7 +885,7 @@ public class DailyChallengeTest {
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (has duplicate letters): " + result2);
     }
 
-    // 63. Check if a matrix is symmetric
+    // 61. Check if a matrix is symmetric
     @Test
     public void testIsMatrixSymmetric() {
         List<List<Integer>> matrix1 = List.of(
@@ -907,7 +909,7 @@ public class DailyChallengeTest {
         assertFalse(result2, () -> "Input: " + matrix2 + " | Output (symmetric): " + result2);
     }
 
-    // 64. Check if string contains only alphabetic letters
+    // 62. Check if string contains only alphabetic letters
     @Test
     public void testIsOnlyAlphabetic() {
         String input1 = "JavaRocks";
@@ -919,7 +921,7 @@ public class DailyChallengeTest {
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (only letters): " + result2);
     }
 
-    // 65. Check if number is semiprime
+    // 63. Check if number is semiprime
     @Test
     public void testIsSemiprime() {
         int input1 = 9; // 3 * 3
@@ -943,31 +945,32 @@ public class DailyChallengeTest {
         return count;
     }
 
-    // 66. Check if string is a valid basic email
+    // 64. Check if string is a valid basic email
     @Test
     public void testIsValidBasicEmail() {
         String input1 = "user@example.com";
-        boolean result1 = input1.contains("@") &&
-                input1.indexOf('@') > 0 &&
-                input1.indexOf('@') == input1.lastIndexOf('@') &&
-                !input1.contains("@.") &&
-                input1.indexOf('.') > input1.indexOf('@') + 1 &&
-                !input1.endsWith(".") &&
-                !input1.startsWith("@");
+        boolean result1 = isValidBasicEmail(input1);
         assertTrue(result1, () -> "Input: \"" + input1 + "\" | Output (valid email): " + result1);
 
         String input2 = "invalidemail@.com";
-        boolean result2 = input2.contains("@") &&
-                input2.indexOf('@') > 0 &&
-                input2.indexOf('@') == input2.lastIndexOf('@') &&
-                !input2.contains("@.") &&
-                input2.indexOf('.') > input2.indexOf('@') + 1 &&
-                !input2.endsWith(".") &&
-                !input2.startsWith("@");
+        boolean result2 = isValidBasicEmail(input2);
         assertFalse(result2, () -> "Input: \"" + input2 + "\" | Output (valid email): " + result2);
     }
 
-    // 67. Count unique words in a sentence (case-insensitive, ignore punctuation)
+    private boolean isValidBasicEmail(String s) {
+        if (s == null) return false;
+        int at = s.indexOf('@');
+        if (at <= 0) return false;
+        if (at != s.lastIndexOf('@')) return false;
+        if (at + 1 >= s.length() - 1) return false;
+        if (s.charAt(at + 1) == '.') return false;
+        int dot = s.indexOf('.', at + 1);
+        if (dot <= at + 1) return false;
+        if (dot == s.length() - 1) return false;
+        return true;
+    }
+
+    // 65. Count unique words in a sentence (case-insensitive, ignore punctuation)
     @Test
     public void testCountUniqueWords() {
         String input = "Hello, hello! How are you?";
