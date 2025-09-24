@@ -1009,4 +1009,35 @@ public class DailyChallengeTest {
      private boolean isNumeric(String s) {
          return s.chars().allMatch(Character::isDigit);
      }
+
+    // 68. First N Fibonacci numbers (loop, recursion, streams)
+    @Test
+    public void testFibonacciVariants() {
+        int n = 7;
+        List<Integer> expected = List.of(0, 1, 1, 2, 3, 5, 8);
+        assertEquals(expected, fibLoop(n));
+        assertEquals(expected, fibRecList(n));
+        assertEquals(expected, fibStream(n));
+    }
+
+    private List<Integer> fibLoop(int n) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0, a = 0, b = 1; i < n; i++) { res.add(a); int c = a + b; a = b; b = c; }
+        return res;
+    }
+
+    private List<Integer> fibRecList(int n) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) res.add(fib(i));
+        return res;
+    }
+
+    private int fib(int k) { return k < 2 ? k : fib(k - 1) + fib(k - 2); }
+
+    private List<Integer> fibStream(int n) {
+        return Stream.iterate(new int[]{0, 1}, p -> new int[]{p[1], p[0] + p[1]})
+                .limit(n)
+                .map(p -> p[0])
+                .toList();
+    }
 }
