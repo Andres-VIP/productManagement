@@ -1010,14 +1010,12 @@ public class DailyChallengeTest {
          return s.chars().allMatch(Character::isDigit);
      }
 
-    // 68. First N Fibonacci numbers (loop, recursion, streams)
+    // 68. First N Fibonacci numbers
     @Test
-    public void testFibonacciVariants() {
+    public void testFibonacciLoop() {
         int n = 7;
         List<Integer> expected = List.of(0, 1, 1, 2, 3, 5, 8);
         assertEquals(expected, fibLoop(n));
-        assertEquals(expected, fibRecList(n));
-        assertEquals(expected, fibStream(n));
     }
 
     private List<Integer> fibLoop(int n) {
@@ -1026,18 +1024,23 @@ public class DailyChallengeTest {
         return res;
     }
 
-    private List<Integer> fibRecList(int n) {
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < n; i++) res.add(fib(i));
-        return res;
+    // 69. Subsets summing to target
+    @Test
+    public void testSubsetsSumToTarget() {
+        int[] a = {2, 3, 5}; int t = 5;
+        Set<String> expected = Set.of("[2, 3]", "[5]");
+        assertEquals(expected, toSetStrings(subsetSumLoop(a, t)));
     }
 
-    private int fib(int k) { return k < 2 ? k : fib(k - 1) + fib(k - 2); }
+    private Set<String> toSetStrings(List<List<Integer>> x){
+        return x.stream().map(List::toString).collect(Collectors.toSet());
+    }
 
-    private List<Integer> fibStream(int n) {
-        return Stream.iterate(new int[]{0, 1}, p -> new int[]{p[1], p[0] + p[1]})
-                .limit(n)
-                .map(p -> p[0])
-                .toList();
+    private List<List<Integer>> subsetSumLoop(int[] a,int t){
+        List<List<Integer>> res=new ArrayList<>(); int n=a.length;
+        for(int m=0;m<1<<n;m++){ int s=0; List<Integer> cur=new ArrayList<>();
+            for(int i=0;i<n;i++) if(((m>>i)&1)==1){ s+=a[i]; cur.add(a[i]); }
+            if(s==t) res.add(cur); }
+        return res;
     }
 }
