@@ -1068,4 +1068,31 @@ public class DailyChallengeTest {
         }
         return count;
     }
+
+    // 71. Find longest consecutive sequence
+    @Test
+    public void testFindLongestConsecutiveSequence() {
+        int[] input1 = {1, 2, 3, 4, 5};
+        assertEquals(5, findLongestConsecutive(input1), () -> "Input: " + Arrays.toString(input1) + " | Output: " + findLongestConsecutive(input1));
+        
+        int[] input2 = {1, 3, 5, 7, 9};
+        assertEquals(1, findLongestConsecutive(input2), () -> "Input: " + Arrays.toString(input2) + " | Output: " + findLongestConsecutive(input2));
+        
+        int[] input3 = {2, 1, 3, 4, 6, 5};
+        assertEquals(4, findLongestConsecutive(input3), () -> "Input: " + Arrays.toString(input3) + " | Output: " + findLongestConsecutive(input3));
+        
+        int[] input4 = {1, 1, 1, 1};
+        assertEquals(1, findLongestConsecutive(input4), () -> "Input: " + Arrays.toString(input4) + " | Output: " + findLongestConsecutive(input4));
+    }
+
+    private int findLongestConsecutive(int[] nums) {
+        if (nums.length == 0) return 0;
+        Arrays.sort(nums);
+        int max = 1, current = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i-1] + 1) current++;
+            else if (nums[i] != nums[i-1]) { max = Math.max(max, current); current = 1; }
+        }
+        return Math.max(max, current);
+    }
 }
