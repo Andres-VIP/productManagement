@@ -1095,4 +1095,29 @@ public class DailyChallengeTest {
         }
         return Math.max(max, current);
     }
+
+    // 72. Evaluate RPN (Reverse Polish Notation)
+    @Test
+    public void testEvaluateRPN() {
+        String[] e1 = {"2", "1", "+", "3", "*"};            // (2+1)*3 = 9
+        String[] e2 = {"4", "13", "5", "/", "+"};           // 4+13/5 = 6
+        String[] e3 = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}; // 22
+        assertEquals(9, evalRPN(e1));
+        assertEquals(6, evalRPN(e2));
+        assertEquals(22, evalRPN(e3));
+    }
+
+    private int evalRPN(String[] t){
+        Deque<Integer> st=new ArrayDeque<>();
+        for(String s:t){
+            switch(s){
+                case "+": st.push(st.pop()+st.pop()); break;
+                case "-": { int b=st.pop(), a=st.pop(); st.push(a-b); break; }
+                case "*": st.push(st.pop()*st.pop()); break;
+                case "/": { int b=st.pop(), a=st.pop(); st.push(a/b); break; }
+                default: st.push(Integer.parseInt(s));
+            }
+        }
+        return st.pop();
+    }
 }
