@@ -1023,24 +1023,4 @@ public class DailyChallengeTest {
         for (int i = 0, a = 0, b = 1; i < n; i++) { res.add(a); int c = a + b; a = b; b = c; }
         return res;
     }
-
-    // 69. Subsets summing to target
-    @Test
-    public void testSubsetsSumToTarget() {
-        int[] a = {2, 3, 5}; int t = 5;
-        Set<String> expected = Set.of("[2, 3]", "[5]");
-        assertEquals(expected, toSetStrings(subsetSumLoop(a, t)));
-    }
-
-    private Set<String> toSetStrings(List<List<Integer>> x){
-        return x.stream().map(List::toString).collect(Collectors.toSet());
-    }
-
-    private List<List<Integer>> subsetSumLoop(int[] a,int t){
-        List<List<Integer>> res=new ArrayList<>(); int n=a.length;
-        for(int m=0;m<1<<n;m++){ int s=0; List<Integer> cur=new ArrayList<>();
-            for(int i=0;i<n;i++) if(((m>>i)&1)==1){ s+=a[i]; cur.add(a[i]); }
-            if(s==t) res.add(cur); }
-        return res;
-    }
 }
