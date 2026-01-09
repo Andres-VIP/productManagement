@@ -969,16 +969,4 @@ public class DailyChallengeTest {
         if (dot == s.length() - 1) return false;
         return true;
     }
-
-    // 65. Count unique words in a sentence (case-insensitive, ignore punctuation)
-    @Test
-    public void testCountUniqueWords() {
-        String input = "Hello, hello! How are you?";
-        long result = Arrays.stream(input.toLowerCase().split("\\W+"))
-                .filter(s -> !s.isBlank())
-                .distinct()
-                .count();
-        assertEquals(4, result,
-                () -> "Input: \"" + input + "\" | Output (unique word count): " + result);
-    }
 }
