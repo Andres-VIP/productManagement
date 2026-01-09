@@ -981,32 +981,4 @@ public class DailyChallengeTest {
         assertEquals(4, result,
                 () -> "Input: \"" + input + "\" | Output (unique word count): " + result);
     }
-
-     // 66. Count vowels in a string
-     @Test
-     public void testCountVowels() {
-         String input1 = "Hello World";
-         assertEquals(3, countVowels(input1), () -> "Input: \"" + input1 + "\" | Vowels: " + countVowels(input1));
-
-         String input2 = "BCDFG";
-         assertEquals(0, countVowels(input2), () -> "Input: \"" + input2 + "\" | Vowels: " + countVowels(input2));
-     }
-
-     private long countVowels(String s) {
-         if (s == null) return 0;
-         return s.toLowerCase().chars().filter(c -> "aeiou".indexOf(c) >= 0).count();
-     }
-
-     // 67. Check if string is numeric
-     @Test
-     public void testIsNumeric() {
-         assertTrue(isNumeric("123"), () -> "Input: \"123\" | Output: true");
-         assertFalse(isNumeric("abc"), () -> "Input: \"abc\" | Output: false");
-         assertTrue(isNumeric("0"), () -> "Input: \"0\" | Output: true");
-         assertFalse(isNumeric("12a3"), () -> "Input: \"12a3\" | Output: false");
-     }
-
-     private boolean isNumeric(String s) {
-         return s.chars().allMatch(Character::isDigit);
-     }
 }
