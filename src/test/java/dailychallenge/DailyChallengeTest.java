@@ -1068,20 +1068,4 @@ public class DailyChallengeTest {
         }
         return count;
     }
-    
-    // 73. Roman numerals to integer
-    @Test
-    public void testRomanToInt() {
-        assertEquals(3, romanToInt("III"));
-        assertEquals(4, romanToInt("IV"));
-        assertEquals(9, romanToInt("IX"));
-        assertEquals(58, romanToInt("LVIII"));
-        assertEquals(1994, romanToInt("MCMXCIV"));
-    }
-
-    private int romanToInt(String s){
-        Map<Character,Integer> m=Map.of('I',1,'V',5,'X',10,'L',50,'C',100,'D',500,'M',1000);
-        int res=0, prev=0; for(int i=s.length()-1;i>=0;i--){ int v=m.get(s.charAt(i)); res+= v<prev? -v : v; prev=v; }
-        return res;
-    }
 }
