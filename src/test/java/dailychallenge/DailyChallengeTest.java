@@ -1009,18 +1009,4 @@ public class DailyChallengeTest {
      private boolean isNumeric(String s) {
          return s.chars().allMatch(Character::isDigit);
      }
-
-    // 68. First N Fibonacci numbers
-    @Test
-    public void testFibonacciLoop() {
-        int n = 7;
-        List<Integer> expected = List.of(0, 1, 1, 2, 3, 5, 8);
-        assertEquals(expected, fibLoop(n));
-    }
-
-    private List<Integer> fibLoop(int n) {
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0, a = 0, b = 1; i < n; i++) { res.add(a); int c = a + b; a = b; b = c; }
-        return res;
-    }
 }
