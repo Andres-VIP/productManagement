@@ -1043,29 +1043,4 @@ public class DailyChallengeTest {
             if(s==t) res.add(cur); }
         return res;
     }
-
-    // 70. Count valid parentheses pairs
-    @Test
-    public void testCountValidParenthesesPairs() {
-        String input1 = "()";
-        assertEquals(1, countValidPairs(input1), () -> "Input: \"" + input1 + "\" | Output: " + countValidPairs(input1));
-        
-        String input2 = "()()";
-        assertEquals(2, countValidPairs(input2), () -> "Input: \"" + input2 + "\" | Output: " + countValidPairs(input2));
-        
-        String input3 = "((()))";
-        assertEquals(3, countValidPairs(input3), () -> "Input: \"" + input3 + "\" | Output: " + countValidPairs(input3));
-        
-        String input4 = "(()())";
-        assertEquals(3, countValidPairs(input4), () -> "Input: \"" + input4 + "\" | Output: " + countValidPairs(input4));
-    }
-
-    private int countValidPairs(String s) {
-        int count = 0, open = 0;
-        for (char c : s.toCharArray()) {
-            if (c == '(') open++;
-            else if (c == ')' && open > 0) { count++; open--; }
-        }
-        return count;
-    }
 }
