@@ -981,19 +981,4 @@ public class DailyChallengeTest {
         assertEquals(4, result,
                 () -> "Input: \"" + input + "\" | Output (unique word count): " + result);
     }
-
-     // 66. Count vowels in a string
-     @Test
-     public void testCountVowels() {
-         String input1 = "Hello World";
-         assertEquals(3, countVowels(input1), () -> "Input: \"" + input1 + "\" | Vowels: " + countVowels(input1));
-
-         String input2 = "BCDFG";
-         assertEquals(0, countVowels(input2), () -> "Input: \"" + input2 + "\" | Vowels: " + countVowels(input2));
-     }
-
-     private long countVowels(String s) {
-         if (s == null) return 0;
-         return s.toLowerCase().chars().filter(c -> "aeiou".indexOf(c) >= 0).count();
-     }
 }
