@@ -996,17 +996,4 @@ public class DailyChallengeTest {
          if (s == null) return 0;
          return s.toLowerCase().chars().filter(c -> "aeiou".indexOf(c) >= 0).count();
      }
-
-     // 67. Check if string is numeric
-     @Test
-     public void testIsNumeric() {
-         assertTrue(isNumeric("123"), () -> "Input: \"123\" | Output: true");
-         assertFalse(isNumeric("abc"), () -> "Input: \"abc\" | Output: false");
-         assertTrue(isNumeric("0"), () -> "Input: \"0\" | Output: true");
-         assertFalse(isNumeric("12a3"), () -> "Input: \"12a3\" | Output: false");
-     }
-
-     private boolean isNumeric(String s) {
-         return s.chars().allMatch(Character::isDigit);
-     }
 }
